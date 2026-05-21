@@ -1,3 +1,5 @@
+// src/products/products.controller.ts
+
 import {
   Body,
   Controller,
@@ -5,7 +7,11 @@ import {
   Post,
 } from '@nestjs/common';
 
-import { ProductsService } from './products.service';
+import {
+  Product,
+  ProductsService,
+} from './products.service';
+
 import { CreateProductDto } from './dto/create-product.dto';
 
 @Controller('products')
@@ -16,14 +22,15 @@ export class ProductsController {
   ) {}
 
   @Get()
-  public getProducts(): any {
+  getProducts(): Product[] {
     return this.productsService.findAll();
   }
 
   @Post()
-  public createProduct(
+  createProduct(
     @Body() body: CreateProductDto,
-  ): any {
+  ): Product {
+
     return this.productsService.create(body);
   }
 }

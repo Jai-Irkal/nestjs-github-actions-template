@@ -1,8 +1,10 @@
+// src/products/products.service.ts
+
 import { Injectable } from '@nestjs/common';
 
 import { CreateProductDto } from './dto/create-product.dto';
 
-interface Product {
+export interface Product {
   id: number;
   name: string;
   price: number;
@@ -28,7 +30,9 @@ export class ProductsService {
     return this.products;
   }
 
-  create(product: CreateProductDto): Product {
+  create(
+    product: CreateProductDto,
+  ): Product {
 
     const newProduct: Product = {
       id: this.products.length + 1,

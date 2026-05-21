@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 
 import { CreateUserDto } from './dto/create-user.dto';
 
-interface User {
+export interface User {
   id: number;
   name: string;
   email: string;
@@ -30,13 +30,18 @@ export class UsersService {
     return this.users;
   }
 
-  findOne(id: number): User | undefined {
+  findOne(
+    id: number,
+  ): User | undefined {
+
     return this.users.find(
       (user) => user.id === id,
     );
   }
 
-  create(user: CreateUserDto): User {
+  create(
+    user: CreateUserDto,
+  ): User {
 
     const newUser: User = {
       id: this.users.length + 1,

@@ -8,7 +8,11 @@ import {
   Post,
 } from '@nestjs/common';
 
-import { UsersService } from './users.service';
+import {
+  User,
+  UsersService,
+} from './users.service';
+
 import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
@@ -19,14 +23,15 @@ export class UsersController {
   ) {}
 
   @Get()
-  getUsers():any {
+  getUsers(): User[] {
     return this.usersService.findAll();
   }
 
   @Get(':id')
   getUser(
     @Param('id') id: string,
-  ):any {
+  ): User | undefined {
+
     return this.usersService.findOne(
       Number(id),
     );
@@ -35,7 +40,8 @@ export class UsersController {
   @Post()
   createUser(
     @Body() body: CreateUserDto,
-  ): any {
+  ): User {
+
     return this.usersService.create(body);
   }
 }
