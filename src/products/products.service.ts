@@ -1,33 +1,42 @@
 import { Injectable } from '@nestjs/common';
 
+import { CreateProductDto } from './dto/create-product.dto';
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+}
+
 @Injectable()
 export class ProductsService {
 
-    private products = [
-        {
-            id: 1,
-            name: 'Laptop',
-            price: 1200,
-        },
-        {
-            id: 2,
-            name: 'Phone',
-            price: 800,
-        },
-    ];
+  private products: Product[] = [
+    {
+      id: 1,
+      name: 'Laptop',
+      price: 1200,
+    },
+    {
+      id: 2,
+      name: 'Phone',
+      price: 800,
+    },
+  ];
 
-    findAll() {
-        return this.products;
-    }
+  findAll(): Product[] {
+    return this.products;
+  }
 
-    create(product: any) {
-        const newProduct = {
-            id: this.products.length + 1,
-            ...product,
-        };
+  create(product: CreateProductDto): Product {
 
-        this.products.push(newProduct);
+    const newProduct: Product = {
+      id: this.products.length + 1,
+      ...product,
+    };
 
-        return newProduct;
-    }
+    this.products.push(newProduct);
+
+    return newProduct;
+  }
 }
