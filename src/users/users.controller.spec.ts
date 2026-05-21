@@ -5,6 +5,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
 describe('UsersController', () => {
 
   let controller: UsersController;
@@ -28,14 +34,16 @@ describe('UsersController', () => {
 
   it('should return users', () => {
 
-    const users = controller.getUsers();
+    const users: User[] =
+      controller.getUsers();
 
     expect(users.length).toBeGreaterThan(0);
   });
 
   it('should return one user', () => {
 
-    const user = controller.getUser('1');
+    const user: User | undefined =
+      controller.getUser('1');
 
     expect(user).toBeDefined();
     expect(user?.id).toBe(1);
